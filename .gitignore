@@ -1,4 +1,4 @@
-syn
-sim
+/syn
+/sim
 .*
 !.gitignore
