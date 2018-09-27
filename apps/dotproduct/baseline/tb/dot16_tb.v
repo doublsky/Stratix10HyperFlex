@@ -134,7 +134,7 @@ module dot16_tb;
         for (j = 0; j < 16; j = j + 1) begin
             acc = acc + a[j] * b[j];
         end
-        exp_res <= #(CLK_P*7) acc;
+        exp_res <= #(CLK_P*8) acc;
     end
 
     // assert output
@@ -142,7 +142,7 @@ module dot16_tb;
         //$monitor("results: %d @ %t", results, $time);
         if (exp_res !== results && rst == 0) begin
             $display("Error: results %d != expected results %d @ %t", results, exp_res, $time);
-            $stop;
+            //$stop;
         end
     end
 
