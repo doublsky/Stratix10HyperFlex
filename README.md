@@ -26,8 +26,7 @@
 
 ## Getting Start
 
-1. Add project root as "HFHOME" to environment variables (required for simulation)
-2. Create a benchmark list file, see the example under scripts
-3. Run `python scripts/compile_benchmarks.py <benchmark list file>` to compile all benchmarks in benchmark list file
-4. Use `--no-sim` for experimental changes. Use `--no-dse` for faster compilation.
-5. Try `python scripts/compile_benchmarks.py -h` for full help message.
+1. Create a benchmark list file, see the example under scripts
+2. Run `python scripts/compile_benchmarks.py <benchmark list file>` to compile all benchmarks in benchmark list file
+3. Use `--no-sim` for experimental changes. Use `--no-dse` for faster compilation.
+4. Try `python scripts/compile_benchmarks.py -h` for full help message.

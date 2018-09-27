@@ -64,6 +64,9 @@ if __name__ == "__main__":
     # turn relative path to absolute
     args.hfhome = os.path.abspath(args.hfhome)
 
+    # add hfhome to env
+    os.environ["HFHOME"] = args.hfhome
+
     # iterate jobs
     with open(args.jobs, "r") as job_list:
         for job in job_list:
