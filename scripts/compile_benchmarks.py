@@ -56,6 +56,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="run batch compilation.")
     parser.add_argument("jobs", help="path to job list file")
     parser.add_argument("--hfhome", default=".", help="path to root of hyperflex home dir, default to current directory")
+    parser.add_argument("--sim-dir", default="./sim", help="path to sim dir, default to ./sim under current directory")
+    parser.add_argument("--syn-dir", default="./syn", help="path to syn dir, default to ./syn under current directory")
     parser.add_argument("--no-sim", action="store_true", help="do not simulate functionality")
     parser.add_argument("--no-dse", action="store_true", help="do not run design space exp")
     parser.add_argument("--num-seeds", type=int, default=5, help="number of seeds in dse, default to 5")
@@ -63,6 +65,8 @@ if __name__ == "__main__":
 
     # turn relative path to absolute
     args.hfhome = os.path.abspath(args.hfhome)
+    args.sim_dir = os.path.abspath(args.sim_dir)
+    args.syn_dir = os.path.abspath(args.syn_dir)
 
     # add hfhome to env
     os.environ["HFHOME"] = args.hfhome
@@ -77,12 +81,12 @@ if __name__ == "__main__":
                 raise Exception("Source directory for job {} does not exist".format(job))
     
             # create work dir
-            work_dir = os.path.join(args.hfhome, "syn", job)
+            work_dir = os.path.join(args.syn_dir, job)
             if not os.path.isdir(work_dir):
                 os.makedirs(work_dir)
     
             # create sim dir
-            sim_dir = os.path.join(args.hfhome, "sim", job)
+            sim_dir = os.path.join(args.sim_dir, job)
             if not os.path.isdir(sim_dir):
                 os.makedirs(sim_dir)
     
