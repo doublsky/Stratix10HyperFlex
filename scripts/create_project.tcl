@@ -26,6 +26,11 @@ proc make_S10_assignments {} {
     set_global_assignment -name FLOW_ENABLE_HYPER_RETIMER_FAST_FORWARD ON
 }
 
+proc make_A10_assignments {} {
+    set_global_assignment -name FAMILY "Arria 10"
+    set_global_assignment -name DEVICE 10AX115R1F40E1SG
+}
+
 proc create_project { src_dir } {
 	project_new -overwrite top
 

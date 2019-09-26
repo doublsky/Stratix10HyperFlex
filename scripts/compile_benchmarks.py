@@ -54,7 +54,7 @@ def compile(src_dir, sim_dir, script_dir, work_dir, args):
 if __name__ == "__main__":
     # cli parser
     parser = argparse.ArgumentParser(description="run batch compilation.")
-    parser.add_argument("jobs", help="path to job list file")
+    parser.add_argument("jobs", nargs="+", help="list of jobs, e.g. aes/baseline aes/step1")
     parser.add_argument("--hfhome", default=".", help="path to root of hyperflex home dir, default to current directory")
     parser.add_argument("--sim-dir", default="./sim", help="path to sim dir, default to ./sim under current directory")
     parser.add_argument("--syn-dir", default="./syn", help="path to syn dir, default to ./syn under current directory")
@@ -72,28 +72,27 @@ if __name__ == "__main__":
     os.environ["HFHOME"] = args.hfhome
 
     # iterate jobs
-    with open(args.jobs, "r") as job_list:
-        for job in job_list:
-            job = job.rstrip()
-            # get sources
-            src_dir = os.path.join(args.hfhome, "apps", job)
-            if not os.path.isdir(src_dir):
-                raise Exception("Source directory for job {} does not exist".format(job))
-    
-            # create work dir
-            work_dir = os.path.join(args.syn_dir, job)
-            if not os.path.isdir(work_dir):
-                os.makedirs(work_dir)
-    
-            # create sim dir
-            sim_dir = os.path.join(args.sim_dir, job)
-            if not os.path.isdir(sim_dir):
-                os.makedirs(sim_dir)
-    
-            # get script_dir
-            script_dir = os.path.join(args.hfhome, "scripts")
-            if not os.path.isdir(script_dir):
-                raise Exception("Scripts directory does not exist")
-    
-            # now compile
-            compile(src_dir, sim_dir, script_dir, work_dir, args)
+    for job in args.jobs:
+        job = job.rstrip()
+        # get sources
+        src_dir = os.path.join(args.hfhome, "apps", job)
+        if not os.path.isdir(src_dir):
+            raise Exception("Source directory for job {} does not exist".format(job))
+
+        # create work dir
+        work_dir = os.path.join(args.syn_dir, job)
+        if not os.path.isdir(work_dir):
+            os.makedirs(work_dir)
+
+        # create sim dir
+        sim_dir = os.path.join(args.sim_dir, job)
+        if not os.path.isdir(sim_dir):
+            os.makedirs(sim_dir)
+
+        # get script_dir
+        script_dir = os.path.join(args.hfhome, "scripts")
+        if not os.path.isdir(script_dir):
+            raise Exception("Scripts directory does not exist")
+
+        # now compile
+        compile(src_dir, sim_dir, script_dir, work_dir, args)
